@@ -29,7 +29,6 @@ let all = orcr.find({}).toArray();
 
 
 
-
 app.get("/",function(req,res){
     all.then(function(ele){
         var iit = [...new Set(ele.map(document => document.Institute))];
