@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
+
+
 const uri = "mongodb+srv://haribhajank5:j7vbWLuUymNCKLFU@cluster2.kp2snpl.mongodb.net/";
 const client = new MongoClient(uri);
 
