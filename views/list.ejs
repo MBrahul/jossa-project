@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOSAA Data Analysis Portal</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+
+    
+</head>
+<body>
+
+
+  <div class="container">
+    <div class="dropdowns">
+      <div class="custom-dropdown">
+        <select id="firstDropdown" onchange="handleFirstDropdownChange()">
+          <option value="">Select an option</option>
+          <% it.forEach(option => { %>
+            <option value="<%= option %>"><%= option %></option>
+          <% }); %>
+        </select>
+      </div>
+    
+    
+      <div class="custom-dropdown">
+        <select id="secondDropdown" onchange="handleSecondDropdownChange()">
+          <option value="">Select an option</option>
+          <% it.forEach(option => { %>
+            <option value="<%= option %>"><%= option %></option>
+          <% }); %>
+        </select>
+      </div>
+    
+      <div class="custom-dropdown">
+        <select id="thirdDropdown" onchange="handleThirdDropdownChange()">
+          <option value="">Select an option</option>
+          <% it.forEach(option => { %>
+            <option value="<%= option %>"><%= option %></option>
+          <% }); %>
+        </select>
+      </div>
+    
+      <div class="custom-dropdown">
+        <select id="fourthDropdown" onchange="handleDropdownChange()">
+          <option value="">Select an option</option>
+        </select>
+      </div>
+    </div>
+
+  <div class="chart-container">
+    <div class="chart">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+
+  </div>
+
+    
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+function handleFirstDropdownChange() {
+    var firstDropdown = document.getElementById('firstDropdown');
+    var selectedOption = firstDropdown.value;
+    
+    // Send AJAX request to the backend with the selected value
+    fetch('/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ selectedOption })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Update the second dropdown menu with the response data
+      var secondDropdown = document.getElementById('secondDropdown');
+      secondDropdown.innerHTML = '<option value="">Select an option</option>';
+      
+      data.forEach(option => {
+        var optionElement = document.createElement('option');
+        optionElement.value = option;
+        optionElement.textContent = option;
+        secondDropdown.appendChild(optionElement);
+      });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+
+
+  function handleSecondDropdownChange() {
+    var secondDropdown = document.getElementById('secondDropdown');
+    var selectedOption2 = secondDropdown.value;
+    
+    // Send AJAX request to the backend with the selected value
+    fetch('/sub', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ selectedOption2 })
+    })
+    .then(response => response.json())
+    .then(data => {
+
+      var thirdDropdown = document.getElementById('thirdDropdown');
+      thirdDropdown.innerHTML = '<option value="">Select an option</option>';
+      
+      data.forEach(option => {
+        var optionElement = document.createElement('option');
+        optionElement.value = option;
+        optionElement.textContent = option;
+        thirdDropdown.appendChild(optionElement);
+      });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+
+  function handleThirdDropdownChange() {
+    var thirdDropdown = document.getElementById('thirdDropdown');
+    var selectedOption3 = thirdDropdown.value;
+    
+    // Send AJAX request to the backend with the selected value
+    fetch('/cat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ selectedOption3 })
+    })
+    .then(response => response.json())
+    .then(data => {
+
+      var fourthDropdown = document.getElementById('fourthDropdown');
+      fourthDropdown.innerHTML = '<option value="">Select an option</option>';
+      
+      data.forEach(option => {
+        var optionElement = document.createElement('option');
+        optionElement.value = option;
+        optionElement.textContent = option;
+        fourthDropdown.appendChild(optionElement);
+      });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+
+
+  function handleDropdownChange() {
+    var collegeDropdown = document.getElementById('firstDropdown');
+    var selectedCollege = firstDropdown.value;
+
+    var courseDropdown = document.getElementById('secondDropdown');
+    var selectedCourse = secondDropdown.value;
+
+    var categoryDropdown = document.getElementById('thirdDropdown');
+    var selectedCategory = thirdDropdown.value;
+
+    var genderDropdown = document.getElementById('fourthDropdown');
+    var selectedGender = fourthDropdown.value;
+
+    // Send AJAX request to the backend with the selected values
+    fetch('/backendRoute', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        college: selectedCollege,
+        course: selectedCourse,
+        category: selectedCategory,
+        gender: selectedGender
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Extract the year and opening rank arrays from the response data
+      var years = data.dyears;
+      var openingRanks = data.dopeningranks;
+
+    var ctx = document.getElementById('myChart');
+    if (years.length > 0 && openingRanks.length > 0) {
+    // Use the year and opening rank arrays in your Chart.js code
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [{
+          label: 'Opening Rank',
+          data: openingRanks,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
+      },
+      options: {
+        // Chart options
+      }
+    });
+  }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+
+
+
+
+
+      </script>
+
+</body>
+</html>
+
+
