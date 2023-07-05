@@ -1,0 +1,64 @@
+/* Styling for the about-section */
+.about-section {
+    text-align: center;
+    padding: 20px;
+    background-color: #ccc4f7;
+  }
+  
+  .about-section h1 {
+    color: #ffffff;
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  
+  /* Styling for the paragraph section */
+  .para {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .para p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .para h3 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  /* Styling for the source section */
+  .source {
+    text-align: center;
+    padding: 20px;
+    background-color: #f7f7f7;
+  }
+  
+  .source h2 {
+    color: #666;
+    font-size: 18px;
+  }
+  
+  .source a {
+    color: #333;
+    text-decoration: underline;
+  }
+  
+  /* Global styles */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eee;
+    color: #333;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+  }

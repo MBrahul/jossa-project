@@ -36,6 +36,10 @@ app.get("/",function(req,res){
     })
 })
 
+app.get("/about",function(req,res){
+    res.render("about");
+})
+
 app.post('/submit', (req, res) => {
     var selectedOption = req.body.selectedOption;
     all.then(function(el){
@@ -104,19 +108,22 @@ app.post('/backendRoute', (req, res) => {
           document.Institute === selectedCollege &&
           document.Academic_Program_Name === selectedCourse &&
           document.Seat_Type === selectedCategory &&
-          document.Gender === selectedGender 
+          document.Gender === selectedGender &&
+          document.Round === 6
         );
       });
     
       // Extract the year and opening rank arrays from the filtered array
       var years = filteredArray.map(document => document.Year);
       var openingRanks = filteredArray.map(document => document.Opening_Rank);
+      var closingRanks = filteredArray.map(document => document.Closing_Rank);
       var dyears = Array.from(new Set(years));
       var dopeningranks = Array.from(new Set(openingRanks));
+      var dclosingranks = Array.from(new Set(closingRanks));
 
     
       // Construct the response data with the year and opening rank arrays
-      const responseData = { dyears, dopeningranks };
+      const responseData = { dyears, dopeningranks, dclosingranks };
     
       res.json(responseData);
     })

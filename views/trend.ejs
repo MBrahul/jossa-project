@@ -24,7 +24,7 @@
 
   <nav class="navbar navbar-expand-lg bg-color">
     <div class="container">
-      <a class="navbar-brand text-white" href="#" style="font-size: 33px;font-weight:300;">Josaa analysis</a>
+      <a class="navbar-brand text-white" href="#" style="font-size: 33px;font-weight:300;">Josaa Analysis Portal</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,13 +32,13 @@
       <div class="collapse navbar-collapse p-3" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-4">
           <li class="nav-item">
-            <a class="nav-link" href="#trend-section">Trend</a>
+            <a class="nav-link" href="/">Trend</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="#rank-wise-section">Rank Wise</a>
-          </li>
+          </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="/about">About</a>
           </li>
 
         </ul>
@@ -93,7 +93,7 @@
 
     <h1 class="section-headline text-center p-3">
       <i class="fa-solid fa-graduation-cap" style="color: #2c1376;"></i>
-      know the most suitable option on your interset
+      Analyze the 7-year trend of Opening and Closing Ranks for a specific branch.
       <i class=" fa fa-duotone fa-building-columns"></i>
         </h1>
 
@@ -165,7 +165,7 @@
   </section>
 
 
-  <section class="rank-wise-section mb-5" id="rank-wise-section">
+  <!-- <section class="rank-wise-section mb-5" id="rank-wise-section">
     <h1 class="section-headline text-center p-3">
       <i class="fa-solid fa-graduation-cap" style="color: #2c1376;"></i>
       know the most suitable option based on your rank
@@ -212,7 +212,7 @@
     </div>
 
   </div>
-  </section>
+  </section> -->
 
 
 
@@ -348,6 +348,7 @@
             // Extract the year and opening rank arrays from the response data
             var years = data.dyears;
             var openingRanks = data.dopeningranks;
+            var closingRanks = data.dclosingranks;
 
             var ctx = document.getElementById('myChart');
             if (years.length > 0 && openingRanks.length > 0) {
@@ -372,6 +373,12 @@
                     label: 'Opening Rank',
                     data: openingRanks,
                     borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                  },
+                  {
+                    label: 'Closing Rank',
+                    data: closingRanks,
+                    borderColor: 'rgb(255,0,0)',
                     tension: 0.1
                   }]
                 },
