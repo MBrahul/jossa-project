@@ -104,7 +104,7 @@ app.post('/backendRoute', (req, res) => {
           document.Institute === selectedCollege &&
           document.Academic_Program_Name === selectedCourse &&
           document.Seat_Type === selectedCategory &&
-          document.Gender === selectedGender
+          document.Gender === selectedGender 
         );
       });
     

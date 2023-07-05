@@ -79,13 +79,13 @@ button:hover{
   text-transform: uppercase;
   font-weight: 500;
 }
-.custom-dropdown select {
+.custom-dropdown select ,input{
   padding: 10px;
   font-size: 17px;
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 5px;
-  /* outline: none; */
+  outline: none;
   background-color: transparent;
   /* appearance: none; */
   /* -webkit-appearance: none; */

@@ -35,7 +35,7 @@
             <a class="nav-link" href="#trend-section">Trend</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Rank Wise</a>
+            <a class="nav-link" href="#rank-wise-section">Rank Wise</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
@@ -72,7 +72,7 @@
 
       <div class="col-12 col-md-12 col-lg-6 order-0 order-lg-1">
         <div class="text-center text-lg-end">
-          <img src="images/welcome.gif" class="img-fluid rounded-4" alt="">
+          <img src="images/logo2.gif" class="img-fluid rounded-4" alt="">
         </div>
       </div>
 
@@ -89,13 +89,13 @@
 
   <!-- all data section  -->
 
-  <section class="trend-section mt-5" id="trend-section">
+  <section class="trend-section mt-5 mb-5" id="trend-section">
 
     <h1 class="section-headline text-center p-3">
       <i class="fa-solid fa-graduation-cap" style="color: #2c1376;"></i>
       know the most suitable option on your interset
-      <i class="fa-solid fa-graduation-cap" style="color: #2c1376;"></i>
-    </h1>
+      <i class=" fa fa-duotone fa-building-columns"></i>
+        </h1>
 
     <div class="container pt-5">
       <div class="row">
@@ -162,6 +162,56 @@
       </div>
 
     </div>
+  </section>
+
+
+  <section class="rank-wise-section mb-5" id="rank-wise-section">
+    <h1 class="section-headline text-center p-3">
+      <i class="fa-solid fa-graduation-cap" style="color: #2c1376;"></i>
+      know the most suitable option based on your rank
+      <i class="fa-solid fa-ranking-star" style="color: #2c1376;"></i>
+    </h1>
+    <div class="container">
+
+
+    <div class="row">
+      <div class="col-12 col-lg-4 col-md-4">
+        <div class="custom-dropdown d-flex flex-column">
+          <label for="rank">*Your Rank*</label>
+          <input type="number" placeholder="Rank">
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-md-4">
+        <div class="custom-dropdown">
+          <label for="college">*Select category*</label>
+          <select id="thirdDropdown" class="fw-lighter" onchange="handleThirdDropdownChange()">
+            <option value="">Select an option</option>
+            <option value="OPEN (PwD)">OPEN (PwD)</option>
+            <option value="OPEN">OPEN</option>
+            <option value="SC">SC</option>
+            <option value="OBC-NCL">OBC-NCL</option>
+            <option value="OBC-NCL (PwD)">OBC-NCL (PwD)</option>
+            <option value="ST">ST</option>
+            <option value="ST (PwD)">ST (Pwd)</option>
+            <option value="SC (PwD)">SC (PwD)</option>
+            <option value="EWS">EWS</option>
+            <option value="EWS (PwD)">EWS (PwD)</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4 col-md-4">
+        <div class="custom-dropdown">
+          <label for="college">*Select category*</label>
+          <select id="thirdDropdown" class="fw-lighter" onchange="handleThirdDropdownChange()">
+            <option value="">Select an option</option>
+            <option value="Gender-Neutral">Gender-Neutral</option>
+            <option value="Female-only (including Supernumerary)">Female-only (including Supernumerary)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+  </div>
   </section>
 
 
