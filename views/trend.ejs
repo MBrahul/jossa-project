@@ -32,11 +32,11 @@
       <div class="collapse navbar-collapse p-3" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-4">
           <li class="nav-item">
-            <a class="nav-link" href="/#trend-section">Trend</a>
+            <a class="nav-link" href="#trend-section">Trend</a>
           </li>
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="#rank-wise-section">Rank Wise</a>
-          </li> -->
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
           </li>
@@ -64,8 +64,8 @@
             <li><p class="text-start">Your best choice based on your rank</p></li>
           </ol>
           <div class="text-center w-100 text-lg-start text-center">
-            <button class="btn-2" data-bs-toggle="tooltip"
-              data-bs-title="about us" href="/about">About us</button>
+            <a href="/about"><button class="btn-2" data-bs-toggle="tooltip"
+              data-bs-title="about us">About us</button></a>
           </div>
         </div>
      
@@ -165,54 +165,70 @@
   </section>
 
 
-  <!-- <section class="rank-wise-section mb-5" id="rank-wise-section">
+  <section class="rank-wise-section mb-5" id="rank-wise-section">
     <h1 class="section-headline text-center p-3">
       <i class="fa-solid fa-graduation-cap" style="color: #2c1376;"></i>
-      know the most suitable option based on your rank
+      Know the most suitable option based on your Rank
       <i class="fa-solid fa-ranking-star" style="color: #2c1376;"></i>
     </h1>
     <div class="container">
 
+    <form id="myForm">
+      <div class="row">
+        <div class="col-12 col-lg-4 col-md-4">
+          <div class="custom-dropdown d-flex flex-column">
+            <label for="rank">*Your Rank*</label>
+            <input id="inputRank" type="number" placeholder="Rank">
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4">
+          <div class="custom-dropdown">
+            <label for="college">*Select category*</label>
+            <select id="thirdDropdown2" class="fw-lighter" onchange="handleThirdDropdownChange()">
+              <option value="">Select an option</option>
+              <option value="OPEN (PwD)">OPEN (PwD)</option>
+              <option value="OPEN">OPEN</option>
+              <option value="SC">SC</option>
+              <option value="OBC-NCL">OBC-NCL</option>
+              <option value="OBC-NCL (PwD)">OBC-NCL (PwD)</option>
+              <option value="ST">ST</option>
+              <option value="ST (PwD)">ST (Pwd)</option>
+              <option value="SC (PwD)">SC (PwD)</option>
+              <option value="EWS">EWS</option>
+              <option value="EWS (PwD)">EWS (PwD)</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-4">
+          <div class="custom-dropdown">
+            <label for="college">*Select Gender*</label>
+            <select id="fourthDropdown2" class="fw-lighter">
+              <option value="">Select an option</option>
+              <option value="Gender-Neutral">Gender-Neutral</option>
+              <option value="Female-only (including Supernumerary)">Female-only (including Supernumerary)</option>
+            </select>
+          </div>
+        </div>
+          <button class="my-4" onclick="getCollege()">Show College Suggestions</button>
 
-    <div class="row">
-      <div class="col-12 col-lg-4 col-md-4">
-        <div class="custom-dropdown d-flex flex-column">
-          <label for="rank">*Your Rank*</label>
-          <input type="number" placeholder="Rank">
-        </div>
+          <table id="resultTable" class="table">
+            <thead>
+              <tr>
+                <th>Opening Rank</th>
+                <th>Closing Rank</th>
+                <th>Institute</th>
+                <th>Academic Program</th>
+                <th>Round</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
       </div>
-      <div class="col-12 col-lg-4 col-md-4">
-        <div class="custom-dropdown">
-          <label for="college">*Select category*</label>
-          <select id="thirdDropdown" class="fw-lighter" onchange="handleThirdDropdownChange()">
-            <option value="">Select an option</option>
-            <option value="OPEN (PwD)">OPEN (PwD)</option>
-            <option value="OPEN">OPEN</option>
-            <option value="SC">SC</option>
-            <option value="OBC-NCL">OBC-NCL</option>
-            <option value="OBC-NCL (PwD)">OBC-NCL (PwD)</option>
-            <option value="ST">ST</option>
-            <option value="ST (PwD)">ST (Pwd)</option>
-            <option value="SC (PwD)">SC (PwD)</option>
-            <option value="EWS">EWS</option>
-            <option value="EWS (PwD)">EWS (PwD)</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-12 col-lg-4 col-md-4">
-        <div class="custom-dropdown">
-          <label for="college">*Select category*</label>
-          <select id="thirdDropdown" class="fw-lighter" onchange="handleThirdDropdownChange()">
-            <option value="">Select an option</option>
-            <option value="Gender-Neutral">Gender-Neutral</option>
-            <option value="Female-only (including Supernumerary)">Female-only (including Supernumerary)</option>
-          </select>
-        </div>
-      </div>
-    </div>
+    </form>
+    
 
   </div>
-  </section> -->
+  </section>
 
 
 
@@ -397,6 +413,76 @@
         alert("Select All The Fields");
       }
     }
+
+
+
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+      var selectedRank = document.getElementById('inputRank').value;
+      var selectedCategory = document.getElementById('thirdDropdown2').value;
+      var selectedGender = document.getElementById('fourthDropdown2').value;
+
+      if(selectedRank && selectedCategory && selectedGender){
+        fetch('/checkCollege', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 
+          rank: selectedRank,
+          category: selectedCategory,
+          gender: selectedGender
+         })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          const tableBody = document.querySelector('#resultTable tbody');
+
+      // Clear the table body
+      tableBody.innerHTML = '';
+
+      // Iterate over the data and create table rows
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+
+        // Create table cells and set their values
+        const openingRankCell = document.createElement('td');
+        openingRankCell.textContent = row.Opening_Rank;
+        tr.appendChild(openingRankCell);
+
+        const closingRankCell = document.createElement('td');
+        closingRankCell.textContent = row.Closing_Rank;
+        tr.appendChild(closingRankCell);
+
+        const instituteCell = document.createElement('td');
+        instituteCell.textContent = row.Institute;
+        tr.appendChild(instituteCell);
+
+        const instituteBranch = document.createElement('td');
+        instituteBranch.textContent = row.Academic_Program_Name;
+        tr.appendChild(instituteBranch);
+
+        const roundCell = document.createElement('td');
+        roundCell.textContent = row.Round;
+        tr.appendChild(roundCell);
+
+        // Append the table row to the table body
+        tableBody.appendChild(tr);
+
+        });
+      })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+      else{
+        alert("Select All The Fields");
+      }
+      
+
+   });
 
 
 

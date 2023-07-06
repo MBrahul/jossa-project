@@ -133,6 +133,32 @@ app.post('/backendRoute', (req, res) => {
   });
 
 
+  app.post("/checkCollege", (req,res) =>{
+    console.log(req.body);
+
+    var category = req.body.category;
+    var gender = req.body.gender;
+    var rank = req.body.rank;
+
+    all.then(function(r){
+        var sortedArray = r.filter(document =>{
+            return(
+                document.Seat_Type === category &&
+                document.Gender === gender &&
+                document.Round === 6 &&
+                document.Year === 2022 &&
+                document.Opening_Rank <= rank &&
+                document.Closing_Rank >= rank 
+            );
+        });
+        sortedArray.sort((a, b) => a.Opening_Rank - b.Opening_Rank);
+        var top10Results = sortedArray.slice(0, 10);
+        console.log(top10Results);
+        res.json(top10Results);
+    })
+    });
+
+
 app.listen(3000,function(){
     console.log("Server is up and running on port 3000");
 })
