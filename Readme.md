@@ -29,7 +29,6 @@ Overall, this project strives to provide students with a valuable resource to su
 
 ## Usage
 
-Explain how to use the project and any specific instructions or guidelines for the users. Include any relevant command line commands or code snippets.
 
 ## Screenshots
 
