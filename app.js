@@ -34,7 +34,8 @@ let all = orcr.find({}).toArray();
 app.get("/",function(req,res){
     all.then(function(ele){
         var iit = [...new Set(ele.map(document => document.Institute))];
-        res.render("trend",{it:iit});
+        var branch = [...new Set(ele.map(document => document.Academic_Program_Name))]
+        res.render("trend",{it:iit, bc:branch});
     })
 })
 
@@ -157,6 +158,32 @@ app.post('/backendRoute', (req, res) => {
         res.json(top10Results);
     })
     });
+
+
+
+    app.post("/checkBranch", (req,res) =>{
+        console.log(req.body);
+    
+        var category = req.body.category;
+        var gender = req.body.gender;
+        var branch = req.body.branch;
+        var rank = req.body.rank;
+    
+        all.then(function(r){
+            var sortedArray = r.filter(document =>{
+                return(
+                    document.Seat_Type === category &&
+                    document.Gender === gender &&
+                    document.Academic_Program_Name === branch &&
+                    document.Round === 6 &&
+                    document.Year === 2022 &&
+                    document.Closing_Rank >= rank 
+                );
+            });
+            sortedArray.sort((a, b) => a.Opening_Rank - b.Opening_Rank);
+            res.json(sortedArray);
+        })
+        });
 
 
 app.listen(3000,function(){
