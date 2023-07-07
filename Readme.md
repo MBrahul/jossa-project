@@ -33,8 +33,6 @@ Explain how to use the project and any specific instructions or guidelines for t
 
 ## Screenshots
 
-Add screenshots or images of the project's webpages or user interfaces. Replace the placeholders below with the actual image filenames and provide captions if necessary.
-
 ### Landing Page
 ![Landing Page](screenshots/landing-page.png)
 
